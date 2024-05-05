@@ -8,10 +8,10 @@ interface SeoProps {
 
 const SEO = ({ title, description, image }: SeoProps) => {
   //You can update your details here
-  const defaultTitle = "NextJs AI - Boilerplate code";
-  const defaultDescription = "NextJs AI - Boilerplate code";
+  const defaultTitle = "Chatver - Chatbot for Cust.Service";
+  const defaultDescription = "Chatver - Chatbot for Cust.Service";
   const defaultImageLink = "https://www.pagepe.com/pagepeHeader2.png";
-  const url = "https://www.boilercode.co";
+  const url = "https://www.chatver.com";
 
   return (
     <Head>

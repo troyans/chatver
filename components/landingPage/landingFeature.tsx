@@ -6,47 +6,112 @@ import why from "@/config/whySet";
 
 const LandingFeature = () => {
   return (
-    <div className="relative" id="features">
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 h-max w-full m-auto grid grid-cols-2 -space-x-52 opacity-20"
-      >
-        <div className="blur-[106px] h-56 bg-gradient-to-br  to-purple-400 from-blue-700"></div>
-        <div className="blur-[106px] h-32 bg-gradient-to-r from-cyan-400  to-indigo-600"></div>
+    <section
+      id="features"
+      className="guideance  flex flex-col max-w-7xl mx-auto items-center mt-10 pb-14 gap-x-20 p-7 gap-y-10 md:gap-y-20"
+    >
+      <div className="p-5 md:p-10">
+        <h2 className="text-3xl lg:text-5xl font-bold text-left">
+          Reduce 75% of Repetitive Customer Support Task and Make Your Customer
+          Happy
+        </h2>
       </div>
-      <LandingContainer>
-        <div className="md:w-2/3 lg:w-1/2">
-          <Sprikle />
 
-          <h2 className="my-8 text-2xl font-bold text-gray-700 dark:text-white md:text-4xl">
-            Describe your product features here
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit, sed do eiusmod tempor
-          </p>
-        </div>
-        <div className="mt-16 grid divide-x divide-y divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-3xl border text-gray-600 border-gray-100 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
-          {features.map((feature, index) => (
-            <Card data={feature} key={index} />
-          ))}
-        </div>
+      <div className="guidance1 px-10">
+        <div className="flex flex-col md:grid md:grid-cols-2 text-center md:text-left md:justify-center md:items-center gap-x-10 gap-y-10">
+          <div className="flex flex-col gap-y-10 mx-auto">
+            <div className="flex flex-col gap-y-5 md:basis-3/4">
+              <h2 className="text-3xl lg:text-4xl font-bold">
+                Custom Knowledgebase Chatbot
+              </h2>
+              <p className="text-xl font-medium">
+                Train your chatbot with custom knowledge base that you input
+                from document or website you have
+              </p>
+            </div>
 
-        <div className="md:w-2/3 lg:w-1/2 mt-12">
-          <Sprikle />
+            <div className="ctahero flex flex-row md:items-start md:justify-start items-center justify-center gap-x-2">
+              <a
+                className="text-lg bg-indigo-950 text-white px-4 py-3 rounded-2xl font-semibold hover:bg-violet-800"
+                href="#cta"
+                rel="noopener noreferrer"
+              >
+                Request Access{" "}
+              </a>
+            </div>
+          </div>
 
-          <h2 className="my-8 text-2xl font-bold text-gray-700 dark:text-white md:text-4xl">
-            Why use our Product
-          </h2>
+          <div className="flex items-center">
+            <img src="./img/chatbot.png" className="md:basis-1/4 rounded-3xl" />
+          </div>
         </div>
-        <div className="mt-16 grid divide-x divide-y divide-gray-100 dark:divide-gray-700 overflow-hidden rounded-3xl border text-gray-600 border-gray-100 dark:border-gray-700 sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
-          {why.map((why, index) => (
-            <Card data={why} key={index} />
-          ))}
+      </div>
+
+      <div className="guidance1 px-10">
+        <div className="flex flex-col md:grid md:grid-cols-2 text-center md:text-left md:justify-center md:items-center gap-x-10 gap-y-10">
+          <div className="flex flex-col gap-y-10 mx-auto">
+            <div className="flex flex-col gap-y-5 md:basis-3/4">
+              <h2 className="text-3xl lg:text-4xl font-bold">
+                Chat Monitoring
+              </h2>
+              <p className="text-xl font-medium">
+                You can monitor conversation between chatbot and your customer
+                with ease
+              </p>
+            </div>
+
+            <div className="ctahero flex flex-row md:items-start md:justify-start items-center justify-center gap-x-2">
+              <a
+                className="text-lg bg-indigo-950 text-white px-4 py-3 rounded-2xl font-semibold hover:bg-violet-800"
+                href="#cta"
+              >
+                Request Access
+              </a>
+            </div>
+          </div>
+
+          <div className="flex items-center">
+            <img
+              src="./img/chat-monitoring.png"
+              className="md:basis-1/4 rounded-3xl"
+            />
+          </div>
         </div>
-      </LandingContainer>
-    </div>
+      </div>
+
+      <div className="guidance1 px-10">
+        <div className="flex flex-col md:grid md:grid-cols-2 text-center md:text-left md:justify-center md:items-center gap-x-10 gap-y-10">
+          <div className="flex flex-col gap-y-10 mx-auto">
+            <div className="flex flex-col gap-y-5 md:basis-3/4">
+              <h2 className="text-3xl lg:text-4xl font-bold">
+                Seamless Human Escalation
+              </h2>
+              <p className="text-xl font-medium">
+                If your Customer have more complex question that Chatbot can't
+                answer properly, Chatbot can escalated chat to human agent
+              </p>
+            </div>
+
+            <div className="ctahero flex flex-row md:items-start md:justify-start items-center justify-center gap-x-2">
+              <a
+                className="text-lg bg-indigo-950 text-white px-4 py-3 rounded-2xl font-semibold hover:bg-violet-800"
+                href="#cta"
+                rel="noopener noreferrer"
+              >
+                Request Access
+              </a>
+            </div>
+          </div>
+
+          <div className="flex items-center">
+            <img
+              src="./img/human-escalation.png"
+              className="md:basis-1/4 rounded-3xl"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

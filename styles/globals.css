@@ -23,3 +23,7 @@ body {
     @apply dark:bg-gray-900 bg-white;
   }
 }
+
+:is(.dark body) {
+  background-color: inherit;
+}

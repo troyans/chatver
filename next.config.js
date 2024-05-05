@@ -13,6 +13,10 @@ const nextConfig = {
     EMAIL_SERVER_USER: process.env.EMAIL_SERVER_USER,
     EMAIL_SERVER_PASSWORD: process.env.EMAIL_SERVER_PASSWORD,
     EMAIL_FROM: process.env.EMAIL_FROM,
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+  },
+  images: {
+    domains: ["randomuser.me"],
   },
   webpack: (config, options) => {
     config.module.rules.push({

@@ -5,10 +5,14 @@ import LandingContainer from "./landingContainer";
 import { useSession } from "next-auth/react";
 import Button from "../elements/button";
 import CustomLink from "../elements/customLink";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function LandingHeader() {
   const { data: session, status } = useSession();
+  const router = useRouter();
   const userEmail = session?.user?.email;
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -23,7 +27,7 @@ export default function LandingHeader() {
 
   return (
     <>
-      <header>
+      <header className="hidden">
         <nav className="z-10 w-full absolute">
           <LandingContainer>
             <div className="flex flex-wrap items-center justify-between py-2 gap-6 md:py-4 md:gap-0 relative">
@@ -113,7 +117,13 @@ export default function LandingHeader() {
                           <Button link="/dashboard" text="Go to Dashboard" />
                         </div>
                         <div className="mt-12 lg:mt-0 ml-2">
-                          <Button link="/api/auth/signout" text="Sign Out" />
+                          <Button
+                            onClickEvent={async () => {
+                              await signOut();
+                              router.push("/");
+                            }}
+                            text="Sign Out"
+                          />
                         </div>
                       </>
                     ) : (
@@ -133,6 +143,96 @@ export default function LandingHeader() {
           </LandingContainer>
         </nav>
       </header>
+      <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 mb-10">
+        <div className="max-w-screen-xl flex flex-row flex-wrap items-center justify-between mx-auto p-3">
+          <a href="/" className="flex items-center  rtl:space-x-reverse">
+            <img src="img/chatver.png" className="h-8" alt="" />
+            <span className="self-center text-xl font-extrabold whitespace-nowrap dark:text-white">
+              Chatver
+            </span>
+          </a>
+
+          <div className="flex ml-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <div className="flex flex-row gap-x-2">
+              {isAuthenticated ? (
+                <div
+                  className="text-sm bg-indigo-950 text-white px-3 py-3 rounded-2xl font-semibold hover:bg-violet-800"
+                  onClick={async () => {
+                    await signOut();
+                  }}
+                >
+                  Sign Out
+                </div>
+              ) : (
+                <a
+                  className="text-sm bg-indigo-950 text-white px-3 py-3 rounded-2xl font-semibold hover:bg-violet-800"
+                  href="/api/auth/signin"
+                  rel="noopener noreferrer"
+                >
+                  Request Access
+                </a>
+              )}
+            </div>
+
+            <button
+              data-collapse-toggle="navbar-sticky"
+              type="button"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              aria-controls="navbar-sticky"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open main menu</span>
+              <svg
+                className="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            id="navbar-sticky"
+          >
+            <ul className="flex flex-col p-4 px-10 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white ">
+              <li>
+                <a
+                  href="#features"
+                  className="text-gray-700 hover:bg-indigo-950 hover:text-white rounded-md px-3 py-2 text-base font-bold"
+                >
+                  Features
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#faq"
+                  className="text-gray-700 hover:bg-indigo-950 hover:text-white rounded-md px-3 py-2 text-base font-medium"
+                >
+                  FAQ
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  className="text-gray-700 hover:bg-indigo-950 hover:text-white rounded-md px-3 py-2 text-base font-medium"
+                >
+                  Blog
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </>
   );
 }
