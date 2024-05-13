@@ -1,5 +1,6 @@
 import CustomerSupport from "@/components/additional/customerSupport";
 import { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 export default function Document() {
   return (
@@ -23,9 +24,24 @@ export default function Document() {
           rel="stylesheet"
         />
       </Head>
+      <Script id="gtm" strategy="afterInteractive">
+        {`
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','${process.env.GTM_ID}');
+      `}
+      </Script>
       <body className="min-h-screen font-['Plus_Jakarta_Sans'] scroll-smooth focus:scroll-auto">
         <Main />
         <NextScript />
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${process.env.GTM_ID}"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
+          }}
+        />
       </body>
     </Html>
   );

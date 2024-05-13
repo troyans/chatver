@@ -1,28 +1,39 @@
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
+import { Base } from "@/types/base";
 
 export default function LandingCta() {
   const { data: session, status } = useSession();
-  const userEmail = session?.user?.email;
+
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [res, setRes] = useState<Base | null>();
   const inputRef = useRef(null);
+
+  const userEmail = session?.user?.email;
 
   const subscribeUser = async (e) => {
     e.preventDefault();
 
-    // this is where your mailchimp request is made
+    // ReactTagManager.action({
+    //   event: "click_all_button",
+    //   clickText: "Request Access",
+    // });
 
-    const res = await fetch("/api/user/subscribeUser", {
-      body: JSON.stringify({
-        email: inputRef.current.value,
-      }),
+    try {
+      const res = await fetch("/api/user/subscribeUser", {
+        body: JSON.stringify({
+          email: inputRef.current.value,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
 
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      method: "POST",
-    });
+      setRes(await res.json());
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -107,59 +118,39 @@ export default function LandingCta() {
                     >
                       <form onSubmit={subscribeUser}>
                         <div className="mc-field-group flex flex-col md:flex-row gap-x-5 gap-y-5 w-full">
-                          <div>
-                            <input
-                              placeholder="Email"
-                              name="EMAIL"
-                              className="required email bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl w-full px-3 py-3"
-                              id="mce-EMAIL"
-                              required={true}
-                              type="email"
-                              ref={inputRef}
-                            />
-                          </div>
-                          <div>
-                            <input
-                              type="submit"
-                              name="subscribe"
-                              id="mc-embedded-subscribe"
-                              className="button text-sm outline outline-style:solid text-white px-10 py-3 rounded-2xl font-semibold cursor-pointer "
-                              value="Request Access"
-                            />
-                          </div>
-                        </div>
-                        <div id="mce-responses" className="clear foot">
-                          <div
-                            className="response"
-                            id="mce-error-response"
-                            style={{ display: "none" }}
-                          ></div>
-                          <div
-                            className="response"
-                            id="mce-success-response"
-                            style={{ display: "none" }}
-                          ></div>
-                        </div>
-
-                        <div
-                          aria-hidden="true"
-                          style={{ position: "absolute", left: "-5000px" }}
-                        >
                           <input
-                            type="text"
-                            name="b_a0b77addb3286c949d100eca0_0d148c6976"
-                            tabIndex={-1}
-                            value=""
+                            placeholder="Email"
+                            name="EMAIL"
+                            className="required email bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl w-full px-3 py-3"
+                            id="mce-EMAIL"
+                            required={true}
+                            type="email"
+                            ref={inputRef}
+                          />
+                          <input
+                            type="submit"
+                            name="subscribe"
+                            id="mc-embedded-subscribe"
+                            className="button text-sm outline outline-style:solid text-white px-10 py-3 rounded-2xl font-semibold cursor-pointer "
+                            value="Request Access"
                           />
                         </div>
-
-                        <div className="optionalParent">
-                          <div className="clear"></div>
-                        </div>
+                        {res && (
+                          <div className="text-center text-xs mt-2">
+                            {!res.success && (
+                              <div className="response text-danger">
+                                {res.message}
+                              </div>
+                            )}
+                            {res.success && (
+                              <div className="response text-success">
+                                {res.message}
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </form>
                     </div>
-                    {/* <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
-                                    <script type="text/javascript">(function($) {window.frames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div> */}
                   </div>
                 </div>
               </div>

@@ -1,8 +1,6 @@
 export default async (req, res) => {
   const { email } = req.body;
 
-  console.log({ email });
-
   if (!email) {
     return res.status(400).json({ error: "Email is required" });
   }
@@ -28,15 +26,19 @@ export default async (req, res) => {
         method: "POST",
       }
     );
+    const resp = await response.json();
 
     if (response.status >= 400) {
       return res.status(400).json({
-        error: `There was an error subscribing to the newsletter.
-          Hit me up peter@peterlunch.com and I'll add you the old fashioned way :(.`,
+        success: false,
+        message: resp.detail,
       });
     }
 
-    return res.status(201).json({ error: "" });
+    return res.status(201).json({
+      success: true,
+      message: "Success subscribing to the request access",
+    });
   } catch (error) {
     return res.status(500).json({ error: error.message || error.toString() });
   }
