@@ -51,7 +51,7 @@ const LandingFooter = () => {
           </div>
         </nav>
         <aside>
-          <p>Copyright © 2024 - Chatver</p>
+          <p>Copyright © 2024 - Deskbox</p>
         </aside>
       </footer>
     </section>

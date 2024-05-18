@@ -106,7 +106,7 @@ export default function LandingCta() {
                 Ready to Automate Customer Support Job?
               </h1>
               <p className="flex text-center text-xl text-gray-600 dark:text-gray-300 ">
-                Be part of people around the world using Chatver to reduce
+                Be part of people around the world using Deskbox to reduce
                 repetitive customer support job
               </p>
               <div className="flex flex-wrap justify-center gap-6 w-full">

@@ -145,10 +145,11 @@ export default function LandingHeader() {
       </header>
       <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 mb-10">
         <div className="max-w-screen-xl flex flex-row flex-wrap items-center justify-between mx-auto p-3">
+          
           <a href="/" className="flex items-center  rtl:space-x-reverse">
-            <img src="img/chatver.png" className="h-8" alt="" />
+            <img src="img/logo.png" className="h-8 mx-1" alt="" />
             <span className="self-center text-xl font-extrabold whitespace-nowrap dark:text-white">
-              Chatver
+              DeskBox
             </span>
           </a>
 
