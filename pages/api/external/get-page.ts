@@ -1,4 +1,4 @@
-import { textParser } from "./helper/text-parser";
+import { getPage, textParser } from "./helper/text-parser";
 
 export default async function handle(req, res) {
   try {
@@ -8,14 +8,14 @@ export default async function handle(req, res) {
       });
     }
 
-    const resp = await textParser(true, req.query.pageId);
+    const response = await getPage(req.query.pageId);
 
     res.setHeader("Cache-Control", "no-store");
-    res.status(200).json({
-      message: "Successfully get page content!",
-      data: resp,
+    res.status(response.code).json({
+      message: response.message,
+      data: response.data,
     });
   } catch (error) {
-    console.error(error);
+    return error;
   }
 }

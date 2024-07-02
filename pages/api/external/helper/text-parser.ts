@@ -167,9 +167,39 @@ export async function textParser(isPage: boolean, pageId: string) {
 
   texts = [];
 
-  return res;
+  return blocks;
 }
+
+export async function getPage(id) {
+  let result = null;
+  try {
+    result = {
+      code: 200,
+      success: true,
+      message: "Success get data",
+      data: await notion.pages.retrieve({ page_id: id })
+    };
+  } catch (error) {
+    error.status === 404 ? (
+      result = {
+        code: 404,
+        success: true,
+        message: "Article Not Publish Yet",
+        data: null
+      }
+    ): (
+      result = {
+        code: error.status,
+        success: true,
+        message: error.message,
+        data: null
+      }
+    )
+  }
+  return result;
+};
 
 module.exports = {
   textParser,
+  getPage
 };

@@ -9,7 +9,9 @@ import { Session } from "next-auth";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { useEffect } from "react";
 import { gtmPageView } from "@/lib/gtm";
+import { QueryClient, QueryClientProvider } from "react-query";
 
+const queryClient = new QueryClient();
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
@@ -27,12 +29,14 @@ export default function App({
       <GoogleAnalytics />
       <SEO />
       <SessionProvider session={session}>
-        <ThemeProvider attribute="class">
-          <LandingLayout>
-            <Component {...pageProps} />
-            <GoogleTagManager gtmId={process.env.GTM_ID} />
-          </LandingLayout>
-        </ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider attribute="class">
+            <LandingLayout>
+              <Component {...pageProps} />
+              <GoogleTagManager gtmId={process.env.GTM_ID} />
+            </LandingLayout>
+          </ThemeProvider>
+        </QueryClientProvider>
       </SessionProvider>
     </>
   );
