@@ -12,6 +12,7 @@ const LandingFooter = () => {
           >
             Contact
           </a>
+          <a href="/help-center" className="link link-hover">Help Center</a>
         </nav>
         <nav>
           <div className="grid grid-flow-col gap-4">
