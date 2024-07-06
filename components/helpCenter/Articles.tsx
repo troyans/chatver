@@ -22,12 +22,7 @@ export default function Articles({ id, articleList }) {
             setArticles((articles) => ([...articles, response]));
         },
         onError: (err) => {
-            const response = {
-                public_url: err?.response?.data.public_url,
-                id: err?.response?.data.id,
-                title: err?.response?.data?.properties?.title?.title?.[0]?.text?.content
-            }
-            setArticles((articles) => ([...articles, response]));
+            setArticles((articles) => ([...articles, err]));
         }
     });
 
@@ -46,9 +41,6 @@ export default function Articles({ id, articleList }) {
             ) : (
                 alert('Article not published yet')
             );
-        },
-        onError: (error) => {
-            alert(error.response.data.message);
         }
     });
 
