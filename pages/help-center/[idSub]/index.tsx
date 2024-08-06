@@ -1,6 +1,5 @@
 import Articles from "@/components/helpCenter/Articles";
-import LandingFooter from "@/components/landingPage/landingFooter";
-import LandingHeader from "@/components/landingPage/landingHeader";
+import HeaderHelpdesk from "@/components/landingPage/helpdesk/HeaderHelpdesk";
 import AuthLayout from "@/components/layout/AuthLayout";
 import { apiExternal } from "@/lib/utils";
 import { useRouter } from "next/router";
@@ -27,9 +26,8 @@ export default function ListArticles() {
     
     return (
         <AuthLayout>
-            <LandingHeader />
-            <Articles id={id} articleList={ articleList } />
-            <LandingFooter />
+            <HeaderHelpdesk/>
+            <Articles articleList={ articleList } />
         </AuthLayout>
     );
 }

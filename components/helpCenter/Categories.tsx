@@ -19,7 +19,7 @@ export default function Categories() {
             setCategories(res.data);
         },
         onError: () => {
-            // router.reload();
+            router.reload();
         }
     });
     
