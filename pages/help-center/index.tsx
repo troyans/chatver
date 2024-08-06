@@ -1,4 +1,5 @@
 import Categories from '@/components/helpCenter/Categories';
+import HeaderHelpdesk from '@/components/landingPage/helpdesk/HeaderHelpdesk';
 import LandingContainer from '@/components/landingPage/landingContainer';
 import LandingFooter from '@/components/landingPage/landingFooter';
 import LandingHeader from '@/components/landingPage/landingHeader';
@@ -13,9 +14,8 @@ export default function HelpCenter() {
   setTheme("system");
   return (
     <AuthLayout>
-        <LandingHeader />
-        <Categories/>
-        <LandingFooter/>
+      <HeaderHelpdesk/>
+      <Categories/>
     </AuthLayout>
   )
 }
