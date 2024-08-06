@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 // import { validateEmail } from "../../lib/utils";
 import { signIn } from "next-auth/react";
@@ -13,6 +14,7 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
+  const typeLogin = router.query.type;
 
   useEffect(() => {
     validate();
@@ -28,7 +30,7 @@ const LoginPage = () => {
     });
 
     if (res?.ok) {
-      router.push("/dashboard");
+      router.push(typeLogin === "notion" ? "/helpdesk-dashboard" : "/dashboard");
       return;
     } else {
       // Toast failed

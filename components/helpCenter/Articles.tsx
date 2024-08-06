@@ -59,8 +59,6 @@ export default function Articles({ id, articleList }) {
         }
     ];
 
-    console.log(articles);
-    
     return (
         <div className='flex flex-col gap-y-12 text-center mt-16 md:py-12 bg-white h-auto min-h-screen px-56'>
             <div className="flex text-left gap-x-4">

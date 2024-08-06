@@ -1,14 +1,14 @@
 import { getPage, textParser } from "./helper/text-parser";
 
 export default async function handle(req, res) {
-  try {
+  try{
     if (!req.query.pageId) {
       res.status(400).json({
         message: "Page ID can't be null!",
       });
     }
-
-    const response = await getPage(req.query.pageId);
+    const token = (req.headers.authorization || '');
+    const response = await getPage(req.query.pageId, token);
 
     res.setHeader("Cache-Control", "no-store");
     res.status(response.code).json({

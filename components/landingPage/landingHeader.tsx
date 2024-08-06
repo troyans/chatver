@@ -7,6 +7,7 @@ import Button from "../elements/button";
 import CustomLink from "../elements/customLink";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function LandingHeader() {
   const { data: session, status } = useSession();
@@ -39,7 +40,7 @@ export default function LandingHeader() {
                 className="hidden peer"
               />
               <div className="relative z-20 w-full flex justify-between lg:w-max md:px-0">
-                <a
+                <Link
                   href="/"
                   aria-label="logo"
                   className="flex space-x-2 items-center"
@@ -49,7 +50,7 @@ export default function LandingHeader() {
                   <span className="text-2xl font-bold text-gray-900 dark:text-white">
                     NextJs - Boilercode
                   </span>
-                </a>
+                </Link>
 
                 <div className="relative flex items-center lg:hidden max-h-10">
                   <label
@@ -146,12 +147,12 @@ export default function LandingHeader() {
       <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600 mb-10">
         <div className="max-w-screen-xl flex flex-row flex-wrap items-center justify-between mx-auto p-3">
           
-          <a href="/" className="flex items-center  rtl:space-x-reverse">
+          <Link href="/" className="flex items-center  rtl:space-x-reverse">
             <img src="img/logo.png" className="h-8 mx-1" alt="" />
             <span className="self-center text-xl font-extrabold whitespace-nowrap dark:text-white">
               DeskBox
             </span>
-          </a>
+          </Link>
 
           <div className="flex ml-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <div className="flex flex-row gap-x-2">
@@ -165,13 +166,27 @@ export default function LandingHeader() {
                   Sign Out
                 </div>
               ) : (
-                <a
-                  className="text-sm bg-indigo-950 text-white px-3 py-3 rounded-2xl font-semibold hover:bg-violet-800"
-                  href="/api/auth/signin"
-                  rel="noopener noreferrer"
-                >
-                  Request Access
-                </a>
+                <>
+                  <Link
+                    className="text-sm bg-indigo-950 text-white px-3 py-3 rounded-2xl font-semibold hover:bg-violet-800"
+                    href="/api/auth/signin"
+                    rel="noopener noreferrer"
+                  >
+                    Request Access
+                  </Link>
+                  <Link
+                    className="text-sm bg-green-950 text-white px-3 py-3 rounded-2xl font-semibold hover:bg-green-800"
+                    href={{
+                      pathname: "/login",
+                      query: {
+                        type: 'notion',
+                      },
+                    }}
+                    rel="noopener noreferrer"
+                  >
+                    Try It Now
+                  </Link>
+                </>
               )}
             </div>
 

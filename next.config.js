@@ -15,6 +15,11 @@ const nextConfig = {
     EMAIL_FROM: process.env.EMAIL_FROM,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NOTION_PARENT_PAGE_ID: process.env.NOTION_PARENT_PAGE_ID,
+    NOTION_CLIENT_ID: process.env.NOTION_CLIENT_ID,
+    NOTION_CLIENT_SECRET: process.env.NOTION_CLIENT_SECRET,
+    NOTION_AUTH_URL: process.env.NOTION_AUTH_URL,
+    BASE_URL: process.env.BASE_URL,
+    DATABASE_URL: process.env.DATABASE_URL
   },
   images: {
     domains: ["randomuser.me"],

@@ -1,9 +1,5 @@
 import { Client, iteratePaginatedAPI } from "@notionhq/client";
 
-const apiKey = process.env.NOTION_API_KEY;
-
-const notion = new Client({ auth: apiKey });
-
 let datas = [];
 
 let texts = [];
@@ -121,13 +117,15 @@ const getTextFromBlock = (block) => {
   datas.push({
     title: text,
     id: block.id,
+    parentId: block.parent.page_id
   });
 
   return text;
 };
 
-async function retrieveBlockChildren(id) {
+async function retrieveBlockChildren(id, token) {
   const blocks = [];
+  const notion = new Client({ auth: token });
 
   // Use iteratePaginatedAPI helper function to get all blocks first-level blocks on the page
   for await (const block of iteratePaginatedAPI(notion.blocks.children.list, {
@@ -140,8 +138,6 @@ async function retrieveBlockChildren(id) {
 }
 
 const printBlockText = (blocks) => {
-  console.log("Displaying blocks:");
-
   for (let i = 0; i < blocks.length; i++) {
     const text = getTextFromBlock(blocks[i]);
 
@@ -149,9 +145,9 @@ const printBlockText = (blocks) => {
   }
 };
 
-export async function textParser(isPage: boolean, pageId: string) {
+export async function textParser(isPage: boolean, pageId: string, token: string) {
   // Make API call to retrieve all block children from the page provided in .env
-  const blocks = await retrieveBlockChildren(pageId);
+  const blocks = await retrieveBlockChildren(pageId, token);
 
   printBlockText(blocks);
 
@@ -170,8 +166,9 @@ export async function textParser(isPage: boolean, pageId: string) {
   return blocks;
 }
 
-export async function getPage(id) {
+export async function getPage(id, token) {
   let result = null;
+  const notion = new Client({ auth: token });
   try {
     result = {
       code: 200,
@@ -199,7 +196,4 @@ export async function getPage(id) {
   return result;
 };
 
-module.exports = {
-  textParser,
-  getPage
-};
+
