@@ -10,7 +10,7 @@ export default function Articles({ articleList }) {
     let [loading, setLoading] = useState(true);
     const router = useRouter();
 
-    
+    // membuat request api untuk mengambil semua detail artikel dari list artikel
     const { mutate: getPageInfoList } = useMutation({
         mutationKey: 'pageInfolist',
         mutationFn: () => getArticleDetail(articleList),

@@ -11,10 +11,12 @@ const HelpdeskDashboard = () => {
     const { data: session, status } = useSession();
     const [statusConnection, setStatusConnection] = useState(false);
 
+    // melakukan request api untuk mengecek apakah akun notion ada menggunakan id user yang login
     const { mutate: getNotionAccountCred } = useMutation({
         mutationKey: 'notionaccount',
         mutationFn: (idAccount: string) => getNotionAccount(idAccount),
         onSuccess: (res) => {
+            // jika ada maka ubah informasi state bahwa user sudah punya akun notion yang ter authoriza
             setStatusConnection(true);
         }
     });
