@@ -8,9 +8,11 @@ import { useEffect, useState } from "react";
 export default function ListArticles() {
     const [articleList, setArticleList] = useState([]);
     
+    // ambil page id yang dikirm di url
     const router = useRouter();
     const id = router.query.idSub;
 
+    // membuat request api dengan page id yang di dapat di url
     const getArticleList = async () => {
         const response = await apiExternal.get(`/get-all-pages?pageId=${id}`);
         return response.data;
@@ -18,6 +20,7 @@ export default function ListArticles() {
 
     useEffect(() => {
         getArticleList().then((res) => {
+            // Simpan response artikelnya dan kirimnya ke component articles
             setArticleList(res.data)
         });
     }, [id]);
@@ -26,7 +29,7 @@ export default function ListArticles() {
     
     return (
         <AuthLayout>
-            <HeaderHelpdesk/>
+            <HeaderHelpdesk />
             <Articles articleList={ articleList } />
         </AuthLayout>
     );

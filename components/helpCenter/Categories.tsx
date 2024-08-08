@@ -12,10 +12,12 @@ export default function Categories() {
     const router = useRouter();
     const { data: session } = useSession();
 
+    // membuat request api get all categories ketika akun notion di temukan
     const { mutate: getAllPage } = useMutation({
         mutationKey: 'allpagedata',
         mutationFn: (pageId: any) => getAlldata(pageId),
         onSuccess: (res) => {
+            // simpat informasi list categories pada state
             setCategories(res.data);
         },
         onError: () => {
@@ -23,12 +25,15 @@ export default function Categories() {
         }
     });
     
+    // melakukan request api untuk mengecek apakah akun notion ada menggunakan id user yang login
     const { mutate: getNotionAccountCred } = useMutation({
         mutationKey: 'notionaccount',
         mutationFn: (idAccount: string) => getNotionAccount(idAccount),
         onSuccess: (res) => {
+            // simpan informasi token dan tempate id ke local storage agar mudah digunakan untuk melakukan request api yang membutuhkan data tersebut
             localStorage.setItem('token', res.access_token);
             localStorage.setItem('templateId', res.template_id);
+            // call function untuk melakukan request get all categories
             getAllPage(res.template_id)
         },
         onError: (error: any) => {

@@ -31,6 +31,7 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+// Table notion akun untuk menyiman informasi akun notion masing masing user (ber relasi dengan user, onr to one)
 model NotionAccount {
   id             String  @id @default(cuid())
   user_id        String
